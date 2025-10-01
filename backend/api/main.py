@@ -1,9 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 import os
-import joblib
 
 # -------- ML Imports --------
 from backend.ml.embeddings.clause_embedder import ClauseMapper
@@ -32,7 +31,6 @@ clause_mapper = ClauseMapper(model_name=CLAUSE_MODEL_NAME)
 vector_store = DecisionEngine(dim=384)
 
 # Load trained fraud model
-FRAUD_MODEL_PATH = r"C:\Users\arpit\Desktop\VeriClaim\VeriClaim\backend\ml\fraud\isolation_forest.joblib"
 fraud_detector = FraudDetector()
 fraud_detector.load()
 
@@ -106,7 +104,13 @@ async def verify_claim(req: VerifyRequest):
         elif decision == "Denied":
             reason += " ⚠️ Fraud risk noted."
 
-    insurance_eligible = "YES" if decision == "Approved" and not fraud_flagged else "NO"
+    # -------- Insurance Eligibility Logic (fixed) --------
+    if decision == "Approved":
+        insurance_eligible = "YES"
+    elif decision == "Review" and not fraud_flagged:
+        insurance_eligible = "MAYBE"
+    else:
+        insurance_eligible = "NO"
 
     return VerifyResponse(
         status=decision,
