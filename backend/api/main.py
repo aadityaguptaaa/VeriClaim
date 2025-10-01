@@ -34,7 +34,7 @@ vector_store = DecisionEngine(dim=384)
 fraud_detector = FraudDetector()
 fraud_detector.load()
 
-# Automatically insert sample clauses
+# Insert sample clauses
 SAMPLE_CLAUSES = [
     "The insurer shall reimburse hospitalization expenses within 30 days.",
     "Pre-existing conditions are excluded from coverage.",
@@ -89,27 +89,32 @@ async def verify_claim(req: VerifyRequest):
     reason = "No strong policy match found."
 
     combined_text = (q_text + " " + relevant_clause).lower()
+
+    # Deny has higher priority
     if any(w in combined_text for w in deny_keywords):
         decision = "Denied"
-        reason = f"Matched policy exclusion (Score: {confidence:.2f})."
+        reason = f"❌ Matched policy exclusion (Score: {confidence:.2f})."
+
+    # Approve only if clear coverage
     elif any(w in combined_text for w in approve_keywords):
-        decision = "Approved"
-        reason = f"Matched policy coverage (Score: {confidence:.2f})."
-
-    # Fraud override
-    if fraud_flagged:
-        if decision == "Approved":
+        if fraud_flagged:
             decision = "Review"
-            reason += " ⚠️ Flagged by fraud detector."
-        elif decision == "Denied":
-            reason += " ⚠️ Fraud risk noted."
+            reason = f"⚠️ Possible fraud despite policy coverage (Score: {confidence:.2f})."
+        else:
+            decision = "Approved"
+            reason = f"✅ Matched policy coverage (Score: {confidence:.2f})."
 
-    # -------- Insurance Eligibility Logic (fixed) --------
+    # Fraud override for neutral cases
+    elif fraud_flagged:
+        decision = "Denied"
+        reason = f"❌ Flagged by fraud detector (Score: {fraud_score})."
+
+    # -------- Insurance Eligibility Logic --------
     if decision == "Approved":
         insurance_eligible = "YES"
-    elif decision == "Review" and not fraud_flagged:
+    elif decision == "Review":
         insurance_eligible = "MAYBE"
-    else:
+    else:  # Denied
         insurance_eligible = "NO"
 
     return VerifyResponse(

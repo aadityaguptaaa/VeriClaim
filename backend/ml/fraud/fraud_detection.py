@@ -97,30 +97,6 @@ class FraudDetector:
         detector.fit(df, feature_cols)
         return detector
 
-    @staticmethod
-    def sample_training_dataframe(n: int = 1000):
-        """
-        Generates a synthetic training dataset for local testing.
-        """
-        rng = np.random.default_rng(0)
-        amounts = np.abs(rng.normal(loc=5000, scale=4000, size=n))
-        days_since = np.abs(rng.normal(loc=400, scale=300, size=n))
-        num_prev = np.clip(rng.poisson(0.5, size=n), 0, 10)
-        ages = np.clip(rng.normal(45, 20, size=n), 0, 100)
-        df = pd.DataFrame({
-            "amount": amounts,
-            "days_since_last_claim": days_since,
-            "num_previous_claims": num_prev,
-            "patient_age": ages
-        })
-        # Inject some anomalies
-        n_anom = max(5, n // 100)
-        for _ in range(n_anom):
-            idx = rng.integers(0, n)
-            df.loc[idx, "amount"] *= 10
-            df.loc[idx, "num_previous_claims"] += 20
-        return df
-
 # Example usage:
 # detector = FraudDetector.train_from_csv("synthetic_insurance_claims_large.csv")
 # detector.load()
