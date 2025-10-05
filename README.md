@@ -57,7 +57,7 @@ Ensure you have the following installed:
 ### 🧩 1. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/vericlaim.git
+git clone https://github.com/aadityaguptaaa/vericlaim.git
 cd vericlaim
 ```
 
