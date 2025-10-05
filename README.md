@@ -41,7 +41,7 @@ By integrating **FastAPI**, **React**, and **advanced NLP models**, VeriClaim st
 | **NLP/Embeddings** | Sentence Transformers | Extracts semantic meaning and performs clause similarity checks |
 | **Vector Store** | In-Memory / Pinecone (optional) | Stores and queries policy embeddings efficiently |
 
----
+<br>
 
 ## ⚙️ Getting Started
 
@@ -52,7 +52,7 @@ Ensure you have the following installed:
 - **Node.js (v16+)**
 - **npm** or **yarn**
 
----
+
 
 ### 🧩 1. Clone the Repository
 
@@ -77,7 +77,7 @@ Start the FastAPI server:
 uvicorn api.main:app --reload --port 8000
 ```
 
----
+
 
 ### 🧠 3. Load Models & Policy Data
 
@@ -92,7 +92,7 @@ This script:
 - Extracts and embeds clauses from a sample **policy PDF**.
 - Uploads vector data into memory or Pinecone (if configured).
 
----
+
 
 ### 💻 4. Frontend Setup (React)
 
@@ -106,7 +106,7 @@ npm start
 
 Then open your browser at [http://localhost:3000](http://localhost:3000).
 
----
+
 
 ## 🧪 Example Workflow
 
@@ -121,7 +121,7 @@ Then open your browser at [http://localhost:3000](http://localhost:3000).
    - 📘 Matching Policy Clause
    - 📊 Fraud Risk Probability
 
----
+<br>
 
 ## 🧰 Folder Structure
 
@@ -147,7 +147,7 @@ vericlaim/
 └── README.md
 ```
 
----
+
 
 ## 📈 Future Enhancements
 
@@ -170,17 +170,17 @@ Feel free to fork this repository, open issues, or submit pull requests.
 This project is licensed under the **MIT License**.  
 You are free to use, modify, and distribute it with attribution.
 
----
+<br>
 
 ## 🧑‍💻 Author
 
 **Aaditya Gupta**  
-**Arpit saxena** \n
+**Arpit saxena** 
 **Aritra Poddar**
 
 📧 [aadityavidit@gmail.com](mailto:aadityavidit@gmail.com)  
 🌐 [LinkedIn](https://linkedin.com/in/aadityaxgupta)
 
----
+
 
 ### ⭐ If you found this project helpful, don’t forget to star the repo!
