@@ -1,7 +1,7 @@
 # 🧾 VeriClaim: AI-Powered Insurance Claim Eligibility Checker
 
 **VeriClaim** is an intelligent, full-stack web application designed to **instantly assess insurance claim eligibility** and **detect potential fraud** using AI and Machine Learning.  
-By integrating **FastAPI**, **React**, and **advanced NLP models**, VeriClaim streamlines the claims review process — offering **real-time, explainable decisions** backed by data and policy understanding.
+By integrating **FastAPI**,  **React**, and **advanced NLP models**, VeriClaim streamlines the claims review process — offering **real-time, explainable decisions** backed by data and policy understanding.
 
 <br>
 
