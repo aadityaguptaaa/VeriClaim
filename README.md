@@ -175,8 +175,8 @@ You are free to use, modify, and distribute it with attribution.
 ## 🧑‍💻 Author
 
 **Aaditya Gupta**  
-**Arpit saxena**
-**Aritro Poddar**
+**Arpit saxena** \n
+**Aritra Poddar**
 
 📧 [aadityavidit@gmail.com](mailto:aadityavidit@gmail.com)  
 🌐 [LinkedIn](https://linkedin.com/in/aadityaxgupta)
